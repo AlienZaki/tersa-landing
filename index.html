@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>tersa — coming soon</title>
+  <meta name="description" content="tersa is on the way." />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Geist Sans for the wordmark + body; same family Vercel uses, free on Google Fonts. -->
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    :root { --logo-rgb: 255,255,255; }
+    body { font-family: "Geist", -apple-system, system-ui, sans-serif; }
+
+    /* The wordmark — treated as a designed logo, not just heading text.
+       Same size as the original; the logo character comes from the Geist forms,
+       the tight tracking, the gradient, and the trademark dot. */
+    .logo {
+      font-family: "Geist", system-ui, sans-serif;
+      font-weight: 800;
+      font-size: clamp(72px, 11vw, 112px);
+      letter-spacing: -0.06em;
+      line-height: 0.9;
+      color: rgb(var(--logo-rgb));
+      background: linear-gradient(180deg, #ffffff 0%, #ffffff 60%, rgba(255,255,255,.55) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    /* trademark accent dot — sits aligned with the wordmark, denoting the brand */
+    .logo-dot {
+      display: inline-block;
+      width: 0.18em; height: 0.18em;
+      border-radius: 9999px;
+      background: #d946ef;
+      transform: translateY(0.62em);
+      margin-left: 0.08em;
+      box-shadow: 0 0 24px rgba(217,70,239,.65);
+    }
+
+    /* aurora background */
+    .aurora { background:
+      radial-gradient(60% 50% at 30% 30%, rgba(99,102,241,.32), transparent 60%),
+      radial-gradient(50% 50% at 70% 70%, rgba(217,70,239,.26), transparent 60%),
+      radial-gradient(45% 45% at 50% 50%, rgba(56,189,248,.16), transparent 60%),
+      #050510;
+    }
+    @keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(120%); } }
+    .shimmer { background: linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent);
+               animation: shimmer 2.4s ease-in-out infinite; }
+  </style>
+</head>
+<body class="aurora min-h-screen text-white antialiased overflow-hidden">
+
+  <main class="relative min-h-screen flex flex-col items-center justify-center px-6 text-center">
+
+    <!-- Wordmark logo: name + trademark dot -->
+    <div class="logo select-none">Tersa<span class="logo-dot" aria-hidden="true"></span></div>
+
+    <!-- accent rule under the logo, fades on both sides -->
+    <div class="relative mt-10 h-px w-44"
+         style="background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent); overflow: hidden;">
+      <div class="shimmer absolute inset-y-0 w-1/2"></div>
+    </div>
+
+    <p class="mt-8 text-[16px] sm:text-[20px] text-white/65 max-w-xl leading-relaxed">
+      Something is on the way.
+    </p>
+
+    <p class="mt-2 text-[12px] tracking-[0.36em] uppercase text-white/40">coming soon</p>
+
+    <footer class="absolute bottom-6 left-0 right-0 flex items-center justify-center gap-2 text-[13px] text-white/35">
+      <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+      <span class="tracking-wider">tersa.io</span>
+    </footer>
+  </main>
+</body>
+</html>
