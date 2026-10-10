@@ -17,7 +17,7 @@ All website copy lives in `index.html`, one HTML comment per section (`<!-- 1. N
 9. Why Tersa: 5 short cards.
 10. About: founder card (initial avatar as a photo placeholder), approved founder text, fact tags.
 11. FAQ: 6 `<details>` accordions that work without JS.
-12. Final CTA: headline, both CTAs, and an inquiry form that opens a pre-filled email to zaki@tersa.io.
+12. Final CTA: headline, both CTAs, and an inquiry form that opens a pre-filled email to hello@tersa.io.
 13. Footer: brand, nav links, legal links, ©.
 
 ## Visual system (existing Tersa theme, unchanged)
