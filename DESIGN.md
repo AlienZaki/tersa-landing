@@ -1,4 +1,4 @@
-# Tersa website — design spec & notes
+# Tersa website: design spec & notes
 
 Single-file static site (`index.html`, embedded CSS + ~60 lines of vanilla JS), deployed on Vercel. No build step, no frameworks, no third-party JS.
 
@@ -40,7 +40,7 @@ All website copy lives in `index.html`, one HTML comment per section (`<!-- 1. N
 
 ## SEO
 
-- Title: "Tersa — AI-Native Product Studio for Founders and Small Businesses"
+- Title: "Tersa | Web apps, internal tools and AI features for small teams"
 - Meta description: as specified in the brief.
 - Canonical `https://tersa.io/`, Open Graph and Twitter tags, Organization JSON-LD (founder, founding date, email, `sameAs` tersa.solutions).
 - Legal pages are `noindex` until they hold real content.
@@ -51,7 +51,7 @@ All website copy lives in `index.html`, one HTML comment per section (`<!-- 1. N
 - `og:image` (commented out): add a 1200×630 `og.png`.
 - `favicon.svg`: placeholder "T" mark.
 - Founder photo (replace the "Z" avatar).
-- "Selected work — coming soon" block in #work.
+- "Selected work: coming soon" block in #work.
 - `impressum.html`, `privacy.html`, `terms.html`: placeholder text only.
 
 ## Recommended next steps
@@ -93,7 +93,7 @@ Two audiences decide whether this page works: **(A)** a non-technical founder de
 - **"Where Claude helps" on every service.** It makes the Claude claim concrete per service instead of a slogan (B), and tells clients exactly what's automated and what isn't (A).
 - **Three principles under the Claude section** (human review, grounded in your data, privacy). These answer the top client worry about AI agencies: quality and data handling (A), and show responsible use (B). ⚠️ These are commitments, so keep them only if they're true for how you work.
 - **"Example" tag on each use-case card**, as well as the section label. A card can be screenshotted or skimmed on its own, and the label stops anyone reading it as a real client project.
-- **"Selected work — coming soon" placeholder.** Leaving the Work nav item with nothing behind it would look worse. The "Be an early client" button turns the gap into an invitation.
+- **"Selected work: coming soon" placeholder.** Leaving the Work nav item with nothing behind it would look worse. The "Be an early client" button turns the gap into an invitation.
 - **Project-type dropdown in the form.** It costs one click and lets you sort inquiries before replying.
 - **Six FAQs only.** That's what the brief asked for. "Who owns the code?" and "What does it cost?" are worth adding when you're ready to answer them publicly.
 
