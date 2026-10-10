@@ -15,7 +15,7 @@ All website copy lives in `index.html`, one HTML comment per section (`<!-- 1. N
 7. Process: 4 steps.
 8. Work: 3 cards labelled "Example use cases" (situation / what Tersa does / where Claude helps), then a dashed placeholder for real portfolio items.
 9. Why Tersa: 5 short cards.
-10. About: founder card (initial avatar as a photo placeholder), approved founder text, fact tags.
+10. About: two short paragraphs and fact tags. No founder name or card.
 11. FAQ: 6 `<details>` accordions that work without JS.
 12. Final CTA: headline, both CTAs, and an inquiry form that opens a pre-filled email to hello@tersa.io.
 13. Footer: brand, nav links, legal links, ©.
@@ -50,7 +50,6 @@ All website copy lives in `index.html`, one HTML comment per section (`<!-- 1. N
 - `BOOKING_URL` in the script at the bottom of `index.html`. Put your Cal.com or Calendly link here and every "Book an intro call" button will open it. While it is empty, the buttons scroll to the inquiry form.
 - `og:image` (commented out): add a 1200×630 `og.png`.
 - `favicon.svg`: placeholder "T" mark.
-- Founder photo (replace the "Z" avatar).
 - "Selected work: coming soon" block in #work.
 - `privacy.html`, `terms.html`: placeholder text only.
 
