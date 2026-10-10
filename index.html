@@ -149,13 +149,12 @@
     .card:hover { border-color: var(--border-strong); background: var(--surface-2); }
     .card h3 { font-size: 20px; letter-spacing: -0.02em; font-weight: 600; line-height: 1.3; }
     .card p { color: var(--muted); font-size: 16px; }
+    /* Icons are neutral. Magenta is reserved for Claude / AI touchpoints so the colour carries meaning. */
     .icon {
       width: 46px; height: 46px; border-radius: 12px; display: grid; place-items: center; flex: none;
-      background: rgba(217,70,239,.12); color: var(--accent); border: 1px solid rgba(217,70,239,.32);
+      background: rgba(255,255,255,.05); color: var(--text); border: 1px solid var(--border-strong);
     }
-    .icon.indigo { background: rgba(99,102,241,.14); color: #a5b4fc; border-color: rgba(99,102,241,.38); }
-    .icon.sky { background: rgba(56,189,248,.12); color: var(--sky); border-color: rgba(56,189,248,.34); }
-    .icon.ok { background: rgba(52,211,153,.12); color: var(--ok); border-color: rgba(52,211,153,.32); }
+    .icon.ai { background: rgba(217,70,239,.12); color: var(--accent); border-color: rgba(217,70,239,.32); }
     .tag {
       display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 12px;
       color: var(--faint); border: 1px solid var(--border); border-radius: 999px; padding: 4px 10px; background: rgba(5,5,16,.4);
@@ -171,7 +170,6 @@
       padding: 7px 14px; border: 1px solid var(--border); border-radius: 999px; background: var(--surface);
     }
     @media (max-width: 560px) { .eyebrow { border-radius: 14px; } }
-    .eyebrow i { width: 6px; height: 6px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 10px var(--ok); flex: none; }
     .hero h1 {
       margin-top: 26px;
       font-weight: 800; font-size: clamp(42px, 6.6vw, 76px);
@@ -182,11 +180,6 @@
     .hero h1 em { font-style: normal; background: linear-gradient(90deg, #f0abfc, var(--accent) 60%, #a5b4fc); -webkit-background-clip: text; background-clip: text; }
     .hero .sub { margin-top: 24px; font-size: clamp(18px, 2vw, 20px); color: var(--muted); max-width: 560px; line-height: 1.55; }
     .hero-cta { margin-top: 36px; display: flex; gap: 12px; flex-wrap: wrap; }
-    .rule { position: relative; width: 176px; height: 1px; margin-top: 40px; overflow: hidden;
-      background: linear-gradient(90deg, rgba(255,255,255,.35), transparent); }
-    .rule::after { content: ""; position: absolute; inset: 0; width: 50%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,.7), transparent); animation: shimmer 2.6s ease-in-out infinite; }
-    @keyframes shimmer { from { transform: translateX(-100%); } to { transform: translateX(220%); } }
 
     /* hero visual — product-style "studio console" */
     .console {
@@ -221,14 +214,15 @@
     @media (min-width: 700px) { .problem-grid { grid-template-columns: 1fr 1fr; } }
     @media (min-width: 1100px) { .problem-grid { grid-template-columns: repeat(4, 1fr); } }
     .problem-grid .card { display: grid; gap: 14px; align-content: start; }
-    .problem-grid .x { font-family: var(--mono); font-size: 12px; color: var(--accent); }
 
     /* ===== Solution ===== */
     .solution { display: grid; gap: 48px; align-items: start; }
     @media (min-width: 1000px) { .solution { grid-template-columns: .9fr 1.1fr; gap: 72px; } }
     .checklist { display: grid; gap: 12px; }
     .checklist li { display: flex; gap: 14px; align-items: flex-start; padding: 18px 20px; border-radius: 14px; border: 1px solid var(--border); background: var(--surface); }
-    .checklist li > span:first-child { color: var(--accent); margin-top: 3px; }
+    .checklist li > span:first-child { color: var(--muted); margin-top: 3px; }
+    .checklist li.is-ai { border-color: rgba(217,70,239,.28); }
+    .checklist li.is-ai > span:first-child { color: var(--accent); }
     .checklist strong { display: block; font-weight: 600; font-size: 16px; }
     .checklist small { display: block; color: var(--muted); font-size: 15px; margin-top: 2px; }
 
@@ -238,7 +232,6 @@
     .service { display: grid; gap: 16px; align-content: start; padding: 32px; }
     .service:hover { transform: translateY(-3px); }
     .service .top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-    .service .num { font-family: var(--mono); font-size: 13px; color: var(--faint); }
     .service h3 { font-size: 22px; }
     .examples { display: flex; flex-wrap: wrap; gap: 8px; }
     .claude-use { margin-top: 4px; padding-top: 16px; border-top: 1px solid var(--border); font-size: 15px; color: var(--muted); }
@@ -267,7 +260,7 @@
     .principles strong { color: var(--text); display: block; font-weight: 600; margin-bottom: 2px; }
 
     /* ===== Process ===== */
-    .process { display: grid; gap: 16px; margin-top: 52px; counter-reset: s; }
+    .process { display: grid; gap: 16px; margin: 52px 0 0; padding: 0; list-style: none; }
     @media (min-width: 700px) { .process { grid-template-columns: 1fr 1fr; } }
     @media (min-width: 1100px) { .process { grid-template-columns: repeat(4, 1fr); } }
     .process .card { display: grid; gap: 12px; align-content: start; }
@@ -292,8 +285,9 @@
     /* ===== Why ===== */
     .why { display: grid; gap: 16px; margin-top: 52px; }
     @media (min-width: 700px) { .why { grid-template-columns: 1fr 1fr; } }
-    @media (min-width: 1100px) { .why { grid-template-columns: repeat(5, 1fr); } }
-    .why .card { display: grid; gap: 14px; align-content: start; padding: 24px; }
+    .why .card { display: grid; grid-template-columns: auto 1fr; grid-template-rows: auto 1fr; gap: 4px 18px; align-items: start; align-content: start; padding: 24px; }
+    .why .card .icon { grid-row: span 2; }
+    .why .card:last-child:nth-child(odd) { grid-column: 1 / -1; }
     .why h3 { font-size: 17px; }
     .why p { font-size: 15px; }
 
@@ -379,7 +373,7 @@
     .no-js .reveal { opacity: 1; transform: none; }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      .rule::after, .pulse { animation: none; }
+      .pulse { animation: none; }
       .reveal { opacity: 1; transform: none; transition: none; }
       .btn, .card, .faq summary svg { transition: none; }
     }
@@ -428,7 +422,7 @@
     <section class="hero" aria-labelledby="hero-title">
       <div class="wrap hero-grid">
         <div>
-          <p class="eyebrow"><i aria-hidden="true"></i>Founded in 2026 · AI-native product studio · Claude-powered delivery</p>
+          <p class="eyebrow">Founded in 2026 · AI-native product studio · Claude-powered delivery</p>
           <h1 id="hero-title">Turn your idea into a <em>working AI product</em></h1>
           <p class="sub">Tersa is an AI-native product studio helping founders and small businesses design, prototype, and launch custom software with Claude-powered workflows.</p>
           <div class="hero-cta">
@@ -437,7 +431,6 @@
             </a>
             <a class="btn btn-ghost" href="#process">See how we work</a>
           </div>
-          <div class="rule" aria-hidden="true"></div>
         </div>
 
         <!-- Abstract product-style illustration (decorative, not a real client project) -->
@@ -470,22 +463,18 @@
         </div>
         <div class="problem-grid">
           <article class="card reveal">
-            <span class="x">01</span>
             <h3>No engineering capacity</h3>
             <p>Many founders have a strong idea and a clear market — but nobody on the team who can build it.</p>
           </article>
           <article class="card reveal">
-            <span class="x">02</span>
             <h3>Agencies are slow and costly</h3>
             <p>Traditional agencies often mean long timelines and big budgets before you see anything that works.</p>
           </article>
           <article class="card reveal">
-            <span class="x">03</span>
             <h3>Generic AI tools fall short</h3>
             <p>Off-the-shelf chatbots don’t understand your data, your customers, or the way your business actually runs.</p>
           </article>
           <article class="card reveal">
-            <span class="x">04</span>
             <h3>The path is unclear</h3>
             <p>Without a technical background, it’s hard to know what to build first, what it costs, or where to start.</p>
           </article>
@@ -500,14 +489,14 @@
           <p class="kicker">The solution</p>
           <h2 id="solution-title">From idea to shipped product—with Claude in the workflow.</h2>
           <p class="lead">Tersa helps founders and small businesses turn ideas into production-ready digital products. We combine product strategy, custom software development, and Claude-powered AI workflows to ship useful software faster.</p>
-          <p class="lead">You bring the idea. We take it to a working MVP, internal tool, AI assistant, or automation.</p>
+          <p class="lead">You bring the idea and knowledge of your customers. We turn it into a working MVP, internal tool, AI assistant, or automation.</p>
         </div>
-        <ul class="checklist reveal">
-          <li><span aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><div><strong>We help define the product</strong><small>Who it’s for, what problem it solves, and what the first version must do.</small></div></li>
-          <li><span aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><div><strong>We design the user experience</strong><small>Clear flows and screens your users can understand without a manual.</small></div></li>
-          <li><span aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><div><strong>We build the MVP or internal tool</strong><small>Real, deployable software — not slides or throwaway mockups.</small></div></li>
-          <li><span aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><div><strong>We integrate AI where it creates real value</strong><small>Only where it saves time or improves outcomes — never AI for its own sake.</small></div></li>
-          <li><span aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><div><strong>We use Claude to move faster</strong><small>Research, planning, prototyping, documentation, and development.</small></div></li>
+        <ul class="checklist reveal" aria-label="What you get">
+          <li><span aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><div><strong>A defined product</strong><small>Who it’s for, the problem it solves, and what the first version must do — written down and agreed.</small></div></li>
+          <li><span aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><div><strong>A designed user experience</strong><small>Clear flows and screens your users understand without a manual.</small></div></li>
+          <li><span aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><div><strong>Working software</strong><small>A deployed MVP or internal tool that real users can try — not slides or throwaway mockups.</small></div></li>
+          <li><span aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><div><strong>AI only where it pays off</strong><small>We add AI where it saves time or improves results — not for its own sake.</small></div></li>
+          <li class="is-ai"><span aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10l-5.6 1.9L12 17.5l-1.9-5.6L4.5 10l5.6-1.4z"/></svg></span><div><strong>Faster, documented delivery</strong><small>Claude speeds up our research, planning, prototyping, documentation, and development.</small></div></li>
         </ul>
       </div>
     </section>
@@ -524,7 +513,6 @@
           <article class="card service reveal">
             <div class="top">
               <div class="icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M11 8v6M8 11h6"/></svg></div>
-              <span class="num">01</span>
             </div>
             <h3>AI Product Discovery</h3>
             <p>Turn a rough idea into a clear product concept, user flows, feature scope, and technical plan.</p>
@@ -532,8 +520,7 @@
           </article>
           <article class="card service reveal">
             <div class="top">
-              <div class="icon indigo" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-4 4 4 4M16 8l4 4-4 4M14 4l-4 16"/></svg></div>
-              <span class="num">02</span>
+              <div class="icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-4 4 4 4M16 8l4 4-4 4M14 4l-4 16"/></svg></div>
             </div>
             <h3>MVP &amp; Custom Software Development</h3>
             <p>Build web apps, dashboards, internal tools, and customer-facing products.</p>
@@ -541,8 +528,7 @@
           </article>
           <article class="card service reveal">
             <div class="top">
-              <div class="icon sky" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10l-5.6 1.9L12 17.5l-1.9-5.6L4.5 10l5.6-1.4z"/></svg></div>
-              <span class="num">03</span>
+              <div class="icon ai" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10l-5.6 1.9L12 17.5l-1.9-5.6L4.5 10l5.6-1.4z"/></svg></div>
             </div>
             <h3>Claude-Powered AI Features</h3>
             <p>Add useful AI functionality to new or existing products.</p>
@@ -553,8 +539,7 @@
           </article>
           <article class="card service reveal">
             <div class="top">
-              <div class="icon ok" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3"/><path d="M18 3v4h-4M6 21v-4h4"/></svg></div>
-              <span class="num">04</span>
+              <div class="icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 0 1 14-5.3M20 12a8 8 0 0 1-14 5.3"/><path d="M18 3v4h-4M6 21v-4h4"/></svg></div>
             </div>
             <h3>AI Workflow Automation</h3>
             <p>Automate repetitive business processes so your team can focus on the work that matters.</p>
@@ -573,12 +558,12 @@
         <div class="reveal">
           <p class="kicker">How we use Claude</p>
           <h2 id="claude-title">Claude is part of how Tersa builds.</h2>
-          <p class="lead">Claude isn’t a feature we bolt on at the end. It runs through our delivery process and powers the AI features we ship to clients.</p>
+          <p class="lead">We use Claude at two levels: in how we build, and in what we build.</p>
         </div>
 
         <div class="claude-panel reveal">
           <div class="claude-col">
-            <h3><span class="icon indigo" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg></span>Inside our delivery process</h3>
+            <h3><span class="icon ai" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg></span>Inside our delivery process</h3>
             <p>How we work with clients, every engagement.</p>
             <ul>
               <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Research markets, competitors, and user needs.</li>
@@ -590,7 +575,7 @@
             </ul>
           </div>
           <div class="claude-col">
-            <h3><span class="icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3M8 9h.01M12 9h4M8 13h8"/></svg></span>Inside the products we build</h3>
+            <h3><span class="icon ai" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8M12 18v3M8 9h.01M12 9h4M8 13h8"/></svg></span>Inside the products we build</h3>
             <p>What your users get, powered by the Claude API.</p>
             <ul>
               <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Build AI assistants and copilots.</li>
@@ -621,7 +606,7 @@
           <h2 id="process-title">A simple path from idea to launch.</h2>
           <p class="lead">Clear steps, clear scope, and a working product you can put in front of real users.</p>
         </div>
-        <ol class="process" style="list-style:none;padding:0;margin-top:52px">
+        <ol class="process">
           <li class="card reveal">
             <span class="step-n">Step 01</span>
             <h3>Discovery call</h3>
@@ -656,7 +641,7 @@
         </div>
         <div class="usecases">
           <article class="card usecase reveal">
-            <div class="icon indigo" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.3-2 5-2 5s3.7-.5 5-2c.7-.8.7-2.1-.1-2.9a2.2 2.2 0 0 0-2.9-.1z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.9A12.9 12.9 0 0 1 22 2c0 2.7-.8 7.5-6 11a22.4 22.4 0 0 1-4 2z"/></svg></div>
+            <div class="icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.3-2 5-2 5s3.7-.5 5-2c.7-.8.7-2.1-.1-2.9a2.2 2.2 0 0 0-2.9-.1z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.9A12.9 12.9 0 0 1 22 2c0 2.7-.8 7.5-6 11a22.4 22.4 0 0 1-4 2z"/></svg></div>
             <div><span class="tag">Example</span><h3 style="margin-top:12px">Founder MVP</h3></div>
             <dl>
               <div><dt>Situation</dt><dd>A founder wants to validate a SaaS idea.</dd></div>
@@ -665,7 +650,7 @@
             </dl>
           </article>
           <article class="card usecase reveal">
-            <div class="icon sky" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg></div>
+            <div class="icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg></div>
             <div><span class="tag">Example</span><h3 style="margin-top:12px">Document intelligence tool</h3></div>
             <dl>
               <div><dt>Situation</dt><dd>A small business needs to pull information out of contracts, invoices, or reports.</dd></div>
@@ -686,7 +671,7 @@
 
         <!-- PLACEHOLDER: replace with real portfolio items / product screenshots once available -->
         <div class="placeholder reveal">
-          <div class="icon ok" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg></div>
+          <div class="icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg></div>
           <div class="ph-text"><strong>Selected work — coming soon</strong>We’re building our first products with clients now. Case studies and screenshots will appear here once they’re live and approved for sharing.</div>
           <a class="btn btn-ghost btn-sm" href="#contact">Be an early client</a>
         </div>
@@ -707,17 +692,17 @@
             <p>You work directly with the person building your product.</p>
           </article>
           <article class="card reveal">
-            <div class="icon indigo" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></svg></div>
+            <div class="icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></svg></div>
             <h3>Focused on shipping</h3>
             <p>The goal is a usable first version — not endless consulting.</p>
           </article>
           <article class="card reveal">
-            <div class="icon sky" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10l-5.6 1.9L12 17.5l-1.9-5.6L4.5 10l5.6-1.4z"/></svg></div>
+            <div class="icon ai" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.6L19.5 10l-5.6 1.9L12 17.5l-1.9-5.6L4.5 10l5.6-1.4z"/></svg></div>
             <h3>AI-native workflow</h3>
             <p>Claude is built into how we research, plan, and build.</p>
           </article>
           <article class="card reveal">
-            <div class="icon ok" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M8 15l2 2 4-4"/></svg></div>
+            <div class="icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M8 15l2 2 4-4"/></svg></div>
             <h3>Clear scope and milestones</h3>
             <p>You always know what’s being built, what’s next, and what it costs.</p>
           </article>
@@ -735,7 +720,7 @@
       <div class="wrap about">
         <div class="reveal">
           <p class="kicker">About</p>
-          <h2 id="about-title">A focused studio, founder-led.</h2>
+          <h2 id="about-title">Who’s behind Tersa.</h2>
           <div class="founder" style="margin-top:32px">
             <!-- PLACEHOLDER: swap the initial for a real founder photo (img, 84×84, rounded) -->
             <div class="avatar" aria-hidden="true">Z</div>
@@ -753,7 +738,6 @@
             <span class="tag">Founded June 2026</span>
             <span class="tag">Based in Germany</span>
             <span class="tag">Serving international clients</span>
-            <span class="tag">Bootstrapped</span>
           </div>
         </div>
       </div>
@@ -805,8 +789,8 @@
             <p class="lead">Tell us what you want to create. We’ll help you define the first version and build it.</p>
             <div class="cta-row">
               <!-- PLACEHOLDER: set BOOKING_URL in the script below (e.g. Cal.com / Calendly) to make this open your calendar -->
-              <a class="btn btn-primary" href="#inquiry" data-booking>Book an intro call</a>
-              <a class="btn btn-ghost" href="mailto:zaki@tersa.io">Email zaki@tersa.io</a>
+              <a class="btn btn-primary" href="#inquiry" data-booking data-hide-without-booking hidden>Book an intro call</a>
+              <a class="btn btn-ghost" href="mailto:zaki@tersa.io" id="email-cta">Email zaki@tersa.io</a>
             </div>
           </div>
 
@@ -855,7 +839,7 @@
         <div>
           <h4>Company</h4>
           <ul>
-            <li><a href="https://tersa.io">tersa.io</a></li>
+            <li>tersa.io</li>
             <li><a href="mailto:zaki@tersa.io">zaki@tersa.io</a></li>
             <li><a href="/impressum">Impressum</a></li>
             <li><a href="/privacy">Privacy Policy</a></li>
@@ -865,7 +849,7 @@
       </div>
       <div class="foot-bottom">
         <span>© 2026 Tersa LLC</span>
-        <span>Made with care in Germany</span>
+        <span>Based in Germany · Working with clients internationally</span>
       </div>
     </div>
   </footer>
@@ -877,7 +861,7 @@
     const BOOKING_URL = '';
     if (BOOKING_URL) {
       document.querySelectorAll('[data-booking]').forEach(a => {
-        a.href = BOOKING_URL; a.target = '_blank'; a.rel = 'noopener';
+        a.href = BOOKING_URL; a.target = '_blank'; a.rel = 'noopener'; a.hidden = false;
       });
     }
 
