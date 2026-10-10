@@ -52,11 +52,11 @@ All website copy lives in `index.html`, one HTML comment per section (`<!-- 1. N
 - `favicon.svg`: placeholder "T" mark.
 - Founder photo (replace the "Z" avatar).
 - "Selected work: coming soon" block in #work.
-- `impressum.html`, `privacy.html`, `terms.html`: placeholder text only.
+- `privacy.html`, `terms.html`: placeholder text only.
 
 ## Recommended next steps
 
-1. **Impressum and Privacy Policy (do this before promoting the site).** Both are legally required for a German-operated site. The privacy policy should mention Vercel hosting logs and Google Fonts. Self-hosting the Geist fonts avoids the Google Fonts data-transfer question entirely.
+1. **Privacy Policy (do this before promoting the site).** The privacy policy should mention Vercel hosting logs and Google Fonts. Self-hosting the Geist fonts avoids the Google Fonts data-transfer question entirely.
 2. **Booking calendar:** set `BOOKING_URL`.
 3. **Form backend:** replace the mailto form with Formspree, or a Vercel function plus Resend, so inquiries arrive without the visitor needing an email app.
 4. **Real work:** once a first project ships and the client approves, replace the placeholder with a short case study and screenshots.
@@ -83,7 +83,7 @@ Two audiences decide whether this page works: **(A)** a non-technical founder de
 | About heading "A focused studio, founder-led." | Repeated "Founder-led" from Why Tersa right above it. | "Who's behind Tersa." |
 | "Bootstrapped" tag in About | Tells a client nothing they can act on, and can read as "fragile". The reviewer gets this from the application, not the site. | Removed. Kept: founded, location, international |
 | Final CTA "Book an intro call" with no booking link | Scrolled to the form directly beside it, so it was a button that did nothing. | Hidden until `BOOKING_URL` is set. Email is the visible alternative to the form |
-| Footer link to tersa.io on tersa.io; "Made with care in Germany" | A link to the page you're already on, and filler text. | tersa.io as plain text; "Based in Germany · Working with clients internationally" (a real fact) |
+| Footer link to tersa.io on tersa.io; "Made with care in Germany" | A link to the page you're already on, and filler text. | tersa.io as plain text; "Tersa LLC · United States" |
 
 ### Kept, and why
 
@@ -99,6 +99,6 @@ Two audiences decide whether this page works: **(A)** a non-technical founder de
 
 ### Open issues, not fixed in code
 
-- **Google Fonts and GDPR.** Loading fonts from Google sends visitor IPs to Google. German courts have fined sites for this (LG München, 2022). Self-host Geist and Geist Mono: download the woff2 files from vercel.com/font, put them in `/fonts`, and swap the `<link>` for `@font-face`. I couldn't download the files from this environment.
+- **Google Fonts privacy.** Loading fonts from Google sends visitor IPs to Google. Self-host Geist and Geist Mono: download the woff2 files from vercel.com/font, put them in `/fonts`, and swap the `<link>` for `@font-face`. I couldn't download the files from this environment.
 - **mailto form.** It only works if the visitor has an email app set up. Add a form backend.
 - **"Work" nav label** points to examples, not work. It's kept because the brief requires it. Rename it to "Examples" until real projects exist if you prefer strict accuracy.
